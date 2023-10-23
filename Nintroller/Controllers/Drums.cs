@@ -135,22 +135,23 @@ namespace NintrollerLib
 
             if (offset > 0)
             {
-
                 bool whichBit1 = (data[offset + 2] & 0x20) == 0;
                 bool whichBit2 = (data[offset + 2] & 0x10) == 0;
                 bool whichBit3 = (data[offset + 2] & 0x08) == 0;
                 bool whichBit4 = (data[offset + 2] & 0x04) == 0;
                 bool whichBit5 = (data[offset + 2] & 0x02) == 0;
                 
-                //Only registering when there is velocity information, if not the game doesn't recognize when you do fast inputs.
-                G = !whichBit1 && whichBit2 && whichBit3 && !whichBit4 && whichBit5;// && (data[offset + 5] & 0x10) == 0;
-                R = !whichBit1 && !whichBit2 && whichBit3 && whichBit4 && !whichBit5;// && (data[offset + 5] & 0x40) == 0;
-                Y = !whichBit1 && whichBit2 && whichBit3 && whichBit4 && !whichBit5;// && (data[offset + 5] & 0x20) == 0;
-                B = whichBit1 && !whichBit2 && !whichBit3 && !whichBit4 && !whichBit5;// && (data[offset + 5] & 0x08) == 0;
-                O = whichBit1 && !whichBit2 && !whichBit3 && !whichBit4 && whichBit5;// && (data[offset + 5] & 0x80) == 0;
-                Bass = !whichBit1 && !whichBit2 && whichBit3 && !whichBit4 && !whichBit5;// && (data[offset + 5] & 0x04) == 0;
+                //Registering at any given info. There's a risk to lose fast inputs, but going better on common beats
+								//let's see how it goes
+                G = (data[offset + 5] & 0x10) == 0;
+                R = (data[offset + 5] & 0x40) == 0;
+                Y = (data[offset + 5] & 0x20) == 0;
+                B = (data[offset + 5] & 0x08) == 0;
+                O = (data[offset + 5] & 0x80) == 0;
+                Bass = (data[offset + 5] & 0x04) == 0;
         
-                /*if(whichBit1 || whichBit2 || whichBit3 || whichBit4 || whichBit5) {         
+#if DEBUG
+                if(whichBit1 || whichBit2 || whichBit3 || whichBit4 || whichBit5) {         
                   Console.WriteLine("RAW: "
                     + (!whichBit1 && !whichBit2 && whichBit3 && whichBit4 && !whichBit5 ? "R" : "")
                     + (!whichBit1 && whichBit2 && whichBit3 && whichBit4 && !whichBit5 ? "Y" : "")
@@ -166,7 +167,8 @@ namespace NintrollerLib
                     + "." + ((data[offset + 3] & 0x40) == 0)
                     + "." + ((data[offset + 3] & 0x20) == 0)
                   );
-                }*/
+                }
+#endif
 
                 //ZR = (data[offset + 5] & 0x04) == 0;
                 Plus = (data[offset + 4] & 0x04) == 0;
