@@ -170,19 +170,13 @@ namespace NintrollerLib
                 }
 #endif
 
-                //ZR = (data[offset + 5] & 0x04) == 0;
                 Plus = (data[offset + 4] & 0x04) == 0;
                 Minus = (data[offset + 4] & 0x10) == 0;
-                //Home = (data[offset + 4] & 0x08) == 0;
 
                 // Dpad
                 Up = (data[offset + 5] & 0x01) == 0;
                 Down = (data[offset + 4] & 0x40) == 0;
-                //Left = (data[offset + 5] & 0x02) == 0;
-                //Right = (data[offset + 4] & 0x80) == 0;
 
-                //Up = false;
-                //Down = false;
                 Left = false;
                 Right = false;
 
@@ -361,59 +355,12 @@ namespace NintrollerLib
         public void SetCalibration(Calibrations.CalibrationPreset preset)
         {
             wiimote.SetCalibration(preset);
-
-            //switch (preset)
-            //{
-            //    case Calibrations.CalibrationPreset.Default:
-            //        //LJoy.Calibrate(Calibrations.Defaults.ClassicControllerProDefault.LJoy);
-            //        //RJoy.Calibrate(Calibrations.Defaults.ClassicControllerProDefault.RJoy);
-            //        SetCalibration(Calibrations.Defaults.ClassicControllerProDefault);
-            //        break;
-
-            //    case Calibrations.CalibrationPreset.Modest:
-            //        SetCalibration(Calibrations.Moderate.ClassicControllerProModest);
-            //        break;
-
-            //    case Calibrations.CalibrationPreset.Extra:
-            //        SetCalibration(Calibrations.Extras.ClassicControllerProExtra);
-            //        break;
-
-            //    case Calibrations.CalibrationPreset.Minimum:
-            //        SetCalibration(Calibrations.Minimum.ClassicControllerProMinimal);
-            //        break;
-
-            //    case Calibrations.CalibrationPreset.None:
-            //        SetCalibration(Calibrations.None.ClassicControllerProRaw);
-            //        break;
-            //}
-
-
-
             Joy.Calibrate(Calibrations.Defaults.GuitarDefault.Joy);
-
-            //SetCalibration(Calibrations.Defaults.ClassicControllerProDefault);
         }
 
         public void SetCalibration(INintrollerState from)
         {
-            //if (from.CalibrationEmpty)
-            //{
-            //    // don't apply empty calibrations
-            //    return;
-            //}
-
-            //if (from.GetType() == typeof(Guitar))
-            //{
-            //    Joy.Calibrate(((Guitar)from).Joy);
-            //}
-            //else if (from.GetType() == typeof(ClassicControllerPro))
-            //{
-            //    Joy.Calibrate(((ClassicControllerPro)from).LJoy);
-            //}
-            //else if (from.GetType() == typeof(Wiimote))
-            //{
-            //    wiimote.SetCalibration(from);
-            //}
+            // not used for drums
         }
 
         public void SetCalibration(string calibrationString)
